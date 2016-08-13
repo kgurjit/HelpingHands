@@ -5,6 +5,19 @@
         </div>
     </div>
     <!-- /.row -->
-    {{#data}}
-    	{{name}}<img src="{{pic}}" class="listing-pic"><br>
-    {{/data}}
+    <!-- Title -->
+    <div class="row">
+        <div class="col-lg-6">
+        	{{#data}}
+		    	{{name}}<img src="{{pic}}" class="listing-pic"><br>
+		    {{/data}}
+        </div>
+
+        <div class="col-lg-6">
+            <div id="map"></div>
+        </div>
+        
+    </div>
+    <!-- /.row -->
+
+    <div class="hidden" id="data">{{toJSON data}}</div>
