@@ -1,3 +1,5 @@
+var orm = require("../config/orm.js");
+
 var ad = {
 	latestTen : function(callback){
 		//fetch data from database and once retrieved call callback with that data
@@ -5,6 +7,9 @@ var ad = {
 
 	allAds : function(callback) {
 		//fetch data from database and once retrieved call callback with that data
+		orm.allAds('tblListing', function (res) {
+			cb(res);
+		});
 	},
 
 	searchByCatg : function(catg, callback) {
