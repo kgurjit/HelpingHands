@@ -42,6 +42,9 @@ var ad = {
 
 	create: function(title, desc, loc, pic, user, callback){
 		//save the above in the database..
+		orm.create('tblListing', desc, loc, pic, user, function (res) {
+			callback(res);
+		});
 	}
 };
 

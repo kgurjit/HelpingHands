@@ -18,7 +18,7 @@ var orm = {
 			cb(result);
 		});
 	},
-	create: function () {
+	create: function (table, cols, vals, callback) {
 		var queryString = 'INSERT INTO ' + table;
 
 		queryString = queryString + ' (';
@@ -32,7 +32,7 @@ var orm = {
 
 		connection.query(queryString, vals, function (err, result) {
 			if (err) throw err;
-			cb(result);
+			callback(result);
 		});
 
 	}
