@@ -21,7 +21,7 @@ router.get('/search', function(req, res, next) {
 });
 
 router.get('/create', function(req, res, next) {
-	res.render('create');
+	res.render('create', {title: 'Create Listing'});
 });
 
 module.exports = router;
