@@ -1,0 +1,13 @@
+.listing-pic {
+	width: 200px;
+}
+
+#map{
+	min-width: 300px;
+	height: 300px;
+}
+
+.search-result {
+	display: block;
+	padding: 20px;
+}
