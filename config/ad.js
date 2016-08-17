@@ -27,8 +27,13 @@ var ad = {
 		});
 	},
 
-	create: function(title, desc, loc, pic, user, callback){
+	create: function(listingData, callback, error){
 		//save the above in the database..
+		Listing.create(listingData).then(function(){
+			callback();
+		}).catch(function(){
+			error();
+		});
 	}
 };
 

@@ -5,9 +5,11 @@
 
         <div class="col-lg-12">
         	{{#data}}
-            <div class="search-result">
-		    	<img src="{{image}}" class="listing-pic"> <label>{{title}}</label>
-                <p>{{details}}</p>
+            <div class="search-result col-md-4">
+		    	<div><img src="{{image}}" class="listing-pic"> </div>
+                <div>{{title}}</div>
+                <div>{{details}}</div>
+                <div>{{address1}}</div>
             </div>
             {{/data}}
         </div>

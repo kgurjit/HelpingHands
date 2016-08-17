@@ -25,4 +25,13 @@ router.get('/create', function(req, res, next) {
 	res.render('create', {title: 'Create Listing'});
 });
 
+router.post('/create', function(req, res, next) {
+	ad.create(req.body, function(){
+		//redirect to details page
+	}, function(){
+		res.render('error', {details: 'Listing could not be created'});
+	});
+});
+
+
 module.exports = router;
