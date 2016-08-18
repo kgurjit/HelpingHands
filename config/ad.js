@@ -7,7 +7,7 @@ var User = require('../models')["user"];
 
 var ad = {
 	getById: function(id, callback) {
-		Listing.findById(id).then(function(listing) {
+		Listing.findOne({where: {id:id}, include: [User, Category]}).then(function(listing) {
 			callback(listing);
 		});
 	},
@@ -19,7 +19,7 @@ var ad = {
 	searchByKeywordsAndLoc : function(keywords, loc, callback){
 		//search the db by keywords and loc and once retreved, call the callback with data
 		var data = [];
-		Listing.findAll({include: [User, Category]}).then(function(listings) {
+		Listing.findAll().then(function(listings) {
 			listings.forEach(function(listing) {
   				data.push(listing);
   			});
