@@ -19,7 +19,7 @@ var ad = {
 	searchByKeywordsAndLoc : function(keywords, loc, callback){
 		//search the db by keywords and loc and once retreved, call the callback with data
 		var data = [];
-		Listing.findAll().then(function(listings) {
+		Listing.findAll({include: [User, Category]}).then(function(listings) {
 			listings.forEach(function(listing) {
   				data.push(listing);
   			});
@@ -37,7 +37,6 @@ var ad = {
 		//check user email. If email exists, get the user id and attach to listing
 		//else create user, get id and attach to listing
 		User.findOrCreate({where: {email: listingData.email}}).spread(function(user, created){
-			console.log('Found User: ' + JSON.stringify(user) + '\n\nCreated:: ' + JSON.stringify(created));
 			listingData.userId = user.id;
 			Listing.create(listingData).then(function(createdListing){
 				callback(createdListing.id);
