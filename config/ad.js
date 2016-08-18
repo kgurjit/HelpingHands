@@ -2,13 +2,13 @@ var db = require('../models');
 var Listing = require('../models')["listing"];
 var Category = require('../models')["category"];
 
-var ad = {
-	latestTen : function(callback){
-		//fetch data from database and once retrieved call callback with that data
-	},
+// var Category = require('../models')["category"];
 
-	allAds : function(callback) {
-		//fetch data from database and once retrieved call callback with that data
+var ad = {
+	getById: function(id, callback) {
+		Listing.findById(id).then(function(listing) {
+			callback(listing);
+		});
 	},
 
 	searchByCatg : function(catg, callback) {
@@ -20,17 +20,25 @@ var ad = {
 		var data = [];
 		Listing.findAll().then(function(listings) {
 			listings.forEach(function(listing) {
-  				console.log('Data: ' + JSON.stringify(listing));
   				data.push(listing);
   			});
   			callback(data);
 		});
 	},
 
+	getAllCategories: function(callback){
+		Category.findAll().then(function(categories){
+			callback(categories);
+		}); 
+	},
+
 	create: function(listingData, callback, error){
-		//save the above in the database..
-		Listing.create(listingData).then(function(){
-			callback();
+		//check user email. If email exists, get the user id and attach to listing
+		//else create user, get id and attach to listing
+
+		//get lat, lng for give address and attach to listing
+		Listing.create(listingData).then(function(createdListing){
+			callback(createdListing.id);
 		}).catch(function(){
 			error();
 		});
