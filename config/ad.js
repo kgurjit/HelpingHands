@@ -1,6 +1,7 @@
 var db = require('../models');
 var Listing = require('../models')["listing"];
 var Category = require('../models')["category"];
+var User = require('../models')["user"];
 
 // var Category = require('../models')["category"];
 
@@ -35,13 +36,19 @@ var ad = {
 	create: function(listingData, callback, error){
 		//check user email. If email exists, get the user id and attach to listing
 		//else create user, get id and attach to listing
-
-		//get lat, lng for give address and attach to listing
-		Listing.create(listingData).then(function(createdListing){
-			callback(createdListing.id);
+		User.findOrCreate({where: {email: listingData.email}}).spread(function(user, created){
+			console.log('Found User: ' + JSON.stringify(user) + '\n\nCreated:: ' + JSON.stringify(created));
+			listingData.userId = user.id;
+			Listing.create(listingData).then(function(createdListing){
+				callback(createdListing.id);
+			}).catch(function(){
+				error();
+			});
 		}).catch(function(){
 			error();
 		});
+		//get lat, lng for give address and attach to listing
+		
 	}
 };
 
