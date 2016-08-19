@@ -1,18 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-
 var session = require('express-session');
 var bcrypt = require('bcrypt-nodejs');
-var path = require('path');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-
-var route = require('./controllers/login_controller');
 var db = require('./models');
 
-var app = express();
-
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 passport.use(new LocalStrategy(function(username, password, done) {
    db.user.findOne({where : {username: username}}).then(function(data) {
       var user = data;
@@ -39,6 +33,8 @@ passport.deserializeUser(function(username, done) {
    });
 });
 
+
+var app = express();
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static(process.cwd() + '/public'));
 
@@ -68,13 +64,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(function(req, res, next) {
+    res.locals.user = req.user; 
+    next();
+});
+
 app.use('/', routes);
-app.get('/createlisting', route.createlisting);
-app.get('/signin', route.signIn);
-app.post('/signin', route.signInPost);
-app.get('/signup', route.signUp);
-app.post('/signup', route.signUpPost);
-app.get('/signout', route.signOut);
 
 var port = 3000;
 app.listen(port);
