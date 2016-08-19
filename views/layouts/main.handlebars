@@ -61,6 +61,14 @@
                     <li>
                         <a class="page-scroll" href="/create">Create Listing</a>
                     </li>
+                    {{#if user.username}}
+                    <li>
+                        <a class="page-scroll" href="/profile">Profile</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/signout">Signout</a>
+                    </li>
+                    {{/if}}
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

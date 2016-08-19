@@ -1,11 +1,14 @@
-'use strict';
-var Sequelize = require('sequelize');
-
 module.exports = function(sequelize, DataTypes) {
-	var User = sequelize.define('user', {
-		email: Sequelize.STRING,
-		managerCode: Sequelize.STRING
-	});
-
-	return User;
+  var User = sequelize.define('user', {
+      username: {
+        type: DataTypes.STRING,
+        unique: true
+      },
+      password: DataTypes.STRING
+    },
+    {
+      timestamps: false
+    }
+  );
+return User;
 };

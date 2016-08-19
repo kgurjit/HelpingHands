@@ -76,7 +76,7 @@ db.listing.belongsTo(db.user);
 // var Category = require('./category');
 // Listing.belongsTo(Category);
 
-db.sequelize.sync({force: true});
+db.sequelize.sync();
 
 // export it. (note: this gets exported when we run require the models dir)
 module.exports = db;

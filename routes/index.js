@@ -28,9 +28,18 @@ router.get('/search', function(req, res, next) {
 });
 
 router.get('/create', function(req, res, next) {
-	ad.getAllCategories(function(categories){
-		res.render('create', {title: 'Create Listing', categories: categories});
-	});
+	if(!req.isAuthenticated()) {
+      res.redirect('/signin');
+	   } else {
+	      var user = req.user;
+	      if(user !== undefined) {
+	         user = user.toJSON();
+	      }
+	      ad.getAllCategories(function(categories){
+			res.render('create', {title: 'Create Listing', categories: categories});
+		});
+	   }
+	
 });
 
 router.post('/create', function(req, res, next) {

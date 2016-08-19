@@ -10,7 +10,11 @@
 .search-result {
 	display: block;
 	padding: 20px;
+
 }
 body {
 	height: 100%;
+}
+.intro-text{
+	margin-bottom: 20px;
 }
