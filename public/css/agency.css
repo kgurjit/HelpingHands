@@ -746,3 +746,14 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #fed136;
 }
+
+/*custom*/
+
+section img.img-responsive {
+  width: 375px;
+  height: 289px;
+}
+
+.listing {
+  margin-top: 20px;
+}

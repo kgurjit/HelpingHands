@@ -24,7 +24,8 @@ router.get('/contact', function(req, res, next) {
 router.get('/listing', function(req, res, next) {
 	ad.getById(req.query.id, function(details) {
 		res.render('listing', {
-			details: details
+			details: details,
+			title: details.title
 		});
 	});
 });
@@ -38,6 +39,16 @@ router.get('/search', function(req, res, next) {
 			data: data
 		});
 	});
+});
+
+router.get('/profile', function(req, res, next) {
+	if (!req.isAuthenticated()) {
+		res.redirect('/signin');
+	} else {
+		res.render('profile', {
+			title: 'Profile'
+		});
+	}
 });
 
 router.get('/create', function(req, res, next) {
