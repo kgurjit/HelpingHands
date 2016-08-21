@@ -4,7 +4,8 @@ var Listing = require('../models')["listing"];
 var Category = require('../models')["category"];
 var User = require('../models')["user"];
 
-// var Category = require('../models')["category"];
+var geocoder = require('geocoder');
+
 
 var ad = {
 	getById: function(id, callback) {
@@ -40,12 +41,21 @@ var ad = {
 	},
 
 	createListing: function(listingData, callback, error) {
-		Listing.create(listingData).then(function(createdListing) {
-			callback(createdListing.id);
-		}).catch(function() {
-			error();
+		var completeAddress = listingData.address + "," + listingData.city + "," + listingData.state + " " + listingData.zipCode;
+		console.log('\n\nComplete Address: ' + completeAddress);
+
+		geocoder.geocode(completeAddress, function ( err, data ) {
+			listingData["latitude"]  = data.results[0].geometry.location.lat;
+		  	listingData["longitude"] = data.results[0].geometry.location.lng;
+		  	console.log('\n\nLat: ' + listingData["latitude"]);
+		  	console.log('\n\nLng: ' + listingData["longitude"]);
+		  	
+		  	Listing.create(listingData).then(function(createdListing) {
+				callback(createdListing.id);
+			}).catch(function() {
+				error();
+			});
 		});
-		//get lat, lng for give address and attach to listing
 	},
 
 	createUser: function(user, callback, error) {

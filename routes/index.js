@@ -75,7 +75,7 @@ router.post('/create', function(req, res, next) {
 		res.redirect('/listing?id=' + id);
 	}, function() {
 		res.render('error', {
-			details: 'Listing could not be created'
+			title: 'Application Error'
 		});
 	});
 });
