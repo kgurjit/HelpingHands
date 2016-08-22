@@ -3,6 +3,8 @@ var passport = require('passport');
 var router = express.Router();
 var ad = require('../config/ad');
 
+var nodemailer = require('nodemailer');
+
 router.get('/', function(req, res, next) {
 	res.render('index', {
 		layout: 'home'
@@ -19,6 +21,31 @@ router.get('/contact', function(req, res, next) {
 	res.render('contact', {
 		title: 'Contact Us'
 	});
+});
+router.post('/contact', function(req, res, next) {
+
+		var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'myappemail2016@gmail.com', 
+            pass: 'RutgersBootcamp' 
+        }
+    });
+
+    var mailOptions = {
+	    from: 'myappemail2016@gmail.com', 
+	    to: 'myappemail2016@gmail.com',
+	    subject: 'Helping Hands Contact Us Details', 
+	    html: "<h3>" + "Contact Name : " + req.body.contactname + "</h3>" + "<br>" +
+	          "<h3>" + "Contact Email : " + req.body.contactemail + "</h3>" + "<br>" + 
+	          "<h3>" + "Contact Phone : " + req.body.contactnumber + "</h3>" + "<br>" + 
+	          "<h3>" + "Contact Details : " + req.body.contactmessage + "</h3>"
+		};
+
+		transporter.sendMail(mailOptions, function(error, info){
+      console.log('Message sent: ' + info.response);
+      res.redirect('/');
+		});
 });
 
 router.get('/listing', function(req, res, next) {
