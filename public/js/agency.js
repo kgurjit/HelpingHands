@@ -30,4 +30,10 @@
         }
     })
 
+    $("a.confirm-to-proceed").on("click", function(e){
+        if(!confirm('Are you sure?')){
+            e.preventDefault();
+        }
+    });
+
 })(jQuery); // End of use strict

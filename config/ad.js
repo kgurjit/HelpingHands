@@ -19,18 +19,57 @@ var ad = {
 		});
 	},
 
-	searchByCatg: function(catg, callback) {
-		//fetch data from database and once retrieved call callback with that data
+	getListingsForUser: function(userId, callback, error) {
+		Listing.findAll({
+			where: {
+				userId: {$eq: userId}
+			}
+		}).then(function(listings){
+			if(!listings || listings.length === 0) {
+				listings = [];
+			}
+			callback(listings);
+		}).catch(function(){
+			error();
+		})
 	},
 
-	searchByKeywordsAndLoc: function(keywords, loc, callback) {
-		//search the db by keywords and loc and once retreved, call the callback with data
-		var data = [];
-		Listing.findAll().then(function(listings) {
-			listings.forEach(function(listing) {
-				data.push(listing);
-			});
-			callback(data);
+	deleteListing: function(listingId, callback, error){
+		Listing.destroy({where: {id: {$eq: listingId}}}).then(function(){
+			callback();
+		}).catch(function(){
+			error();
+		});
+	},
+
+	searchByKeywordsAndLoc: function(keywords, loc, callback, error) {
+		var condition = {
+			where: {
+				$or: [{
+					title: {
+						$like: '%' + keywords + '%'
+					}
+				}, {
+
+					details: {
+						$like: '%' + keywords + '%'
+					}
+				}]
+			}};
+
+		if(loc && loc.trim().length === 5) {
+			condition.where['$and'] = {zipCode: {$eq: loc}};
+		}	
+
+		Listing.findAll(condition).then(function(listings) {
+			if(!listings || listings.length === 0) {
+				listings = [];
+			} 
+			callback(listings);
+		}).catch(function(){
+			if(error) {
+				error();
+			}
 		});
 	},
 
@@ -44,13 +83,13 @@ var ad = {
 		var completeAddress = listingData.address + "," + listingData.city + "," + listingData.state + " " + listingData.zipCode;
 		console.log('\n\nComplete Address: ' + completeAddress);
 
-		geocoder.geocode(completeAddress, function ( err, data ) {
-			listingData["latitude"]  = data.results[0].geometry.location.lat;
-		  	listingData["longitude"] = data.results[0].geometry.location.lng;
-		  	console.log('\n\nLat: ' + listingData["latitude"]);
-		  	console.log('\n\nLng: ' + listingData["longitude"]);
-		  	
-		  	Listing.create(listingData).then(function(createdListing) {
+		geocoder.geocode(completeAddress, function(err, data) {
+			listingData["latitude"] = data.results[0].geometry.location.lat;
+			listingData["longitude"] = data.results[0].geometry.location.lng;
+			console.log('\n\nLat: ' + listingData["latitude"]);
+			console.log('\n\nLng: ' + listingData["longitude"]);
+
+			Listing.create(listingData).then(function(createdListing) {
 				callback(createdListing.id);
 			}).catch(function() {
 				error();

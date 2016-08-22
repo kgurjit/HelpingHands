@@ -8,6 +8,11 @@
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane fade in active" id="mng-listing">
           <h1>Manage Listing</h1>
+          {{#listings}}
+            {{title}} <a href='deleteListing?id={{id}}' class='confirm-to-proceed'>Delete</a><br>
+          {{else}}
+          <h3>You do not have any listings</h3>
+          {{/listings}}
         </div>
         <div role="tabpanel" class="tab-pane fade" id="profile">
           <h1>Change Password</h1>

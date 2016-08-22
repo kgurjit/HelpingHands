@@ -32,9 +32,8 @@ router.get('/listing', function(req, res, next) {
 
 router.get('/search', function(req, res, next) {
 	ad.searchByKeywordsAndLoc(req.query.q, req.query.loc, function(data) {
-		console.log('Rcvd data from backend: ' + JSON.stringify(data));
 		res.render('search', {
-			title: 'Search Results',
+			title: 'Search Results (' + data.length + ')',
 			q: req.query.q,
 			data: data
 		});
@@ -45,9 +44,26 @@ router.get('/profile', function(req, res, next) {
 	if (!req.isAuthenticated()) {
 		res.redirect('/signin');
 	} else {
-		res.render('profile', {
-			title: 'Profile'
+		ad.getListingsForUser(req.user.id, function(listings){
+			res.render('profile', {
+				title: 'Profile',
+				listings: listings
+			});
+		}, function(){
+				res.render('error', {title: 'Application Error'});
+			});
+	}
+});
+
+router.get('/deleteListing', function(req, res, next){
+	if(req.query.id) {
+		ad.deleteListing(req.query.id, function(){
+			res.redirect('profile');		
+		}, function(){
+			res.render('error');
 		});
+	} else {
+		res.redirect('profile');
 	}
 });
 
