@@ -2,7 +2,7 @@
             <form class="form-vertical" action="/create" method="post">
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Choose category</div>
+                    <div class="panel-heading"><b>Choose Category</b></div>
                     <div class="panel-body">
 
 
@@ -19,7 +19,7 @@
                                         <div class="col-sm-9">
 
                                             <select id="category" class="form-control " name="categoryId">
-                                                <option value="">Choose a category</option>
+                                                <option value="">Choose a Category</option>
                                                 {{#categories}}
                                                     <option value="{{id}}">{{name}}</option>
                                                 {{/categories}}
@@ -35,7 +35,7 @@
 
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Ad details</div>
+                    <div class="panel-heading"><b>Listing Details</b></div>
                     <div class="panel-body">
 
 
@@ -68,7 +68,7 @@
                 </div>			
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Address</div>
+                    <div class="panel-heading"><b>Address</b></div>
                     <div class="panel-body">
 
                         <div class="form-group">
@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success pull-right">Submit</button>
+                        <button type="submit" class="btn btn-default pull-right">Submit</button>
                     </div>
                 </div>
 

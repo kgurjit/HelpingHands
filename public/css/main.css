@@ -18,3 +18,8 @@ body {
 .intro-text{
 	margin-bottom: 20px;
 }
+.btn-default {
+  color: #fff;
+  background-color: #fed136;
+  border-color: #fed136;
+}

@@ -116,7 +116,7 @@ fieldset[disabled] .btn-primary.active {
 .btn-xl.active,
 .open .dropdown-toggle.btn-xl {
   color: white;
-  background-color: #fec503;
+  background-color: white;
   border-color: #f6bf01;
 }
 .btn-xl:active,
@@ -542,7 +542,7 @@ section h3.section-subheading {
 }
 .team-member img {
   margin: 0 auto;
-  border: 7px solid white;
+  
 }
 .team-member h4 {
   margin-top: 25px;
@@ -599,7 +599,8 @@ section#contact ::-moz-placeholder {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   font-weight: 700;
-  color: #eeeeee;
+  color: 
+  ;
 }
 section#contact :-ms-input-placeholder {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -649,6 +650,7 @@ ul.social-buttons li a:focus,
 ul.social-buttons li a:active {
   background-color: #fed136;
 }
+
 .btn:focus,
 .btn:active,
 .btn.active,
@@ -749,10 +751,10 @@ body {
 
 /*custom*/
 
-section img.img-responsive {
+/*section img.img-responsive {
   width: 375px;
   height: 289px;
-}
+}*/
 
 .listing {
   margin-top: 20px;

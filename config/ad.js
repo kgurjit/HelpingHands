@@ -42,36 +42,27 @@ var ad = {
 		});
 	},
 
-	searchByKeywordsAndLoc: function(keywords, loc, callback, error) {
-		var condition = {
-			where: {
-				$or: [{
-					title: {
-						$like: '%' + keywords + '%'
-					}
-				}, {
+	searchByKeywordsAndLoc: function(catgId, loc, callback, error) {
+		var condition = {};
+		if(catgId !== '') {
+			condition['where'] = {categoryId: catgId};
+		}
+       
+       if(loc && loc.trim().length === 5) {
+           condition.where['$and'] = {zipCode: {$eq: loc}};
+       }    
 
-					details: {
-						$like: '%' + keywords + '%'
-					}
-				}]
-			}};
-
-		if(loc && loc.trim().length === 5) {
-			condition.where['$and'] = {zipCode: {$eq: loc}};
-		}	
-
-		Listing.findAll(condition).then(function(listings) {
-			if(!listings || listings.length === 0) {
-				listings = [];
-			} 
-			callback(listings);
-		}).catch(function(){
-			if(error) {
-				error();
-			}
-		});
-	},
+       Listing.findAll(condition).then(function(listings) {
+           if(!listings || listings.length === 0) {
+               listings = [];
+           } 
+           callback(listings);
+       }).catch(function(){
+           if(error) {
+               error();
+           }
+       });
+   },
 
 	getAllCategories: function(callback) {
 		Category.findAll().then(function(categories) {

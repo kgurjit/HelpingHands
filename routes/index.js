@@ -5,10 +5,20 @@ var ad = require('../config/ad');
 
 var nodemailer = require('nodemailer');
 
+// router.get('/', function(req, res, next) {
+// 	res.render('index', {
+// 		layout: 'home'
+// 	});
+// });
+
+
 router.get('/', function(req, res, next) {
-	res.render('index', {
-		layout: 'home'
-	});
+    ad.getAllCategories(function(categories) {
+            res.render('index', {
+                layout: 'home',
+                categories: categories
+            });
+        });
 });
 
 router.get('/about', function(req, res, next) {
