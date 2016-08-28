@@ -21,12 +21,13 @@ $(document).ready(function(){
 
             (function (marker, entry) {
 
-                var mapContent = "<div style = 'width:200px;min-height:40px'>" + 
-                    "<div>" + entry.title + "</div>" + "<hr>" + 
-                    "<div>" + entry.address + "</div>" + 
-                    "<div>" + entry.city + ", " + entry.state + " " + entry.zipCode + "</div>" +
-                    "<a href='listing?id=" + entry.id + "'>Details</a>" + 
-                    "</div>"
+                
+var mapContent = "<div style = 'width:200px;min-height:40px'>" + 
+                   "<div><b>" + entry.title + "</b></div>" + "<hr>" + 
+                   "<div><b>" + entry.address + "</b></div>" + 
+                   "<div><b>" + entry.city + ", " + entry.state + " " + entry.zipCode + "</b></div>" +
+                   "<a class='map-link' href='listing?id=" + entry.id + "'>Listing Details</a>" + 
+                   "</div>"
 
                 google.maps.event.addListener(marker, "click", function (e) {
                     infoWindow.setContent(mapContent);

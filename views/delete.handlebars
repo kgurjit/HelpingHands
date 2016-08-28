@@ -1,0 +1,25 @@
+
+<div class="row">
+ <div class="col-lg-12">
+ 
+<div class="row" style="margin-bottom: 270px;">
+   <div>
+    {{#listings}}
+     <table class="table table-bordered table-hover table-custom">
+     <tr>
+       <td>{{title}}</td>
+       <td><img class='img-responsive img-centered img-custom' src='{{image}}' alt=''></td> 
+       <td>{{details}}</td>
+       <td class='text-center'><a href='deleteListing?id={{id}}' class='confirm-to-proceed'>Delete Listing</a></td>
+     </tr>
+     </table>
+     {{else}}
+     <h3>You do not have any listings</h3>
+     {{/listings}}
+   </div>
+
+ </div>
+</div>
+
+
+

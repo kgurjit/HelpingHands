@@ -77,13 +77,13 @@ router.get('/search', function(req, res, next) {
 	});
 });
 
-router.get('/profile', function(req, res, next) {
+router.get('/delete', function(req, res, next) {
 	if (!req.isAuthenticated()) {
 		res.redirect('/signin');
 	} else {
 		ad.getListingsForUser(req.user.id, function(listings){
-			res.render('profile', {
-				title: 'Profile',
+			res.render('delete', {
+				title: 'Delete Listing',
 				listings: listings
 			});
 		}, function(){
@@ -100,7 +100,7 @@ router.get('/deleteListing', function(req, res, next){
 			res.render('error');
 		});
 	} else {
-		res.redirect('profile');
+		res.redirect('delete');
 	}
 });
 
