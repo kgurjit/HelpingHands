@@ -12,8 +12,8 @@
 	padding: 20px;
 
 }
-body {
-	height: 700px;
+body,html {
+	height: 100%;
 
 }
 .intro-text{
