@@ -48,3 +48,22 @@ body,html {
 .table-custom{
  background: #F4F3EF ;
 }
+
+.portfolio-item {
+    height: 410px;
+    max-height: 410px;
+    overflow: hidden;
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+}
+
+.portfolio-item img {
+	height: 270px;
+	max-height: 270px;
+	display: inline;
+}
+
+.portfolio-link {
+	background: #fff;
+}
