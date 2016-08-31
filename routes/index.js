@@ -95,7 +95,7 @@ router.get('/delete', function(req, res, next) {
 router.get('/deleteListing', function(req, res, next){
 	if(req.query.id) {
 		ad.deleteListing(req.query.id, function(){
-			res.redirect('profile');		
+			res.redirect('delete');		
 		}, function(){
 			res.render('error');
 		});
