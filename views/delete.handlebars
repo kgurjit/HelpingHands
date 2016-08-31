@@ -6,12 +6,12 @@
    <div>
     {{#listings}}
      <table class="table table-bordered table-hover table-custom">
-     <tr>
-       <td>{{title}}</td>
-       <td><img class='img-responsive img-centered img-custom' src='{{image}}' alt=''></td> 
-       <td>{{details}}</td>
-       <td class='text-center'><a href='deleteListing?id={{id}}' class='confirm-to-proceed'>Delete Listing</a></td>
-     </tr>
+       <tr>
+         <td class="table-row-format">{{title}}</td>
+         <td class="table-row-format"><img class='img-responsive img-centered img-custom' src='{{image}}' alt=''></td> 
+         <td class="table-row-format">{{details}}</td>
+         <td class='text-center table-row-format'><a href='deleteListing?id={{id}}' class='confirm-to-proceed'>Delete Listing</a></td>
+       </tr>
      </table>
      {{else}}
      <h3>You do not have any listings</h3>
@@ -20,6 +20,8 @@
 
  </div>
 </div>
+
+
 
 
 
